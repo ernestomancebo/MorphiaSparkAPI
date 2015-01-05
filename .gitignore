@@ -13,3 +13,4 @@ hs_err_pid*
 
 # Project/IDE folder
 .idea/
+*.iml
