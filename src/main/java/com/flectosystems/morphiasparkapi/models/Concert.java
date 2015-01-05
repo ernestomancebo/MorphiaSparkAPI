@@ -1,23 +1,28 @@
 package com.flectosystems.morphiasparkapi.models;
 
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Represents a concert. As every concert, it has an {@link Artist} in a {@link Venue}.
  * <p/>
  * Created by ernesto on 1/4/15.
  */
+@Entity("concerts")
 public class Concert extends BaseEntity {
 
     protected String name;
     protected Date concertDate;
     @Embedded
-    protected Venue venue;
+    protected ConcertPrice prices;
     @Reference
-    protected Artist artist;
+    protected Venue venue;
+    @Reference("concert_artists")
+    protected List<Artist> artist;
 
     public String getName() {
         return name;
@@ -35,11 +40,11 @@ public class Concert extends BaseEntity {
         this.venue = venue;
     }
 
-    public Artist getArtist() {
+    public List<Artist> getArtist() {
         return artist;
     }
 
-    public void setArtist(Artist artist) {
+    public void setArtist(List<Artist> artist) {
         this.artist = artist;
     }
 
@@ -51,13 +56,22 @@ public class Concert extends BaseEntity {
         this.concertDate = concertDate;
     }
 
+    public ConcertPrice getPrices() {
+        return prices;
+    }
+
+    public void setPrices(ConcertPrice prices) {
+        this.prices = prices;
+    }
+
     @Override
     public String toString() {
         return "Concert{" +
                 "name='" + name + '\'' +
+                ", concertDate=" + concertDate +
+                ", prices=" + prices +
                 ", venue=" + venue +
                 ", artist=" + artist +
-                ", concerDate=" + concertDate +
                 '}';
     }
 }

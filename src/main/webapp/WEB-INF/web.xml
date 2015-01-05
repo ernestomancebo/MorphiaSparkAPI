@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app  xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="sparkapp" version="3.0" >
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="sparkapp" version="3.0">
     <display-name>Morphia Spark API</display-name>
     <description>A sample Morphia Spark API on a Servlet Container</description>
 
-<!--    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>-->
+    <!--Database connection-->
+    <listener>
+        <listener-class>com.flectosystems.morphiasparkapi.config.MongoDBInitializer</listener-class>
+    </listener>
+
+    <!--Database connection params-->
+    <context-param>
+        <param-name>database</param-name>
+        <param-value>concert_api</param-value>
+    </context-param>
+    <context-param>
+        <param-name>databaseHost</param-name>
+        <param-value>127.0.0.1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>databasePort</param-name>
+        <param-value>27017</param-value>
+    </context-param>
+    <context-param>
+        <param-name>socketTimeout</param-name>
+        <param-value>60000</param-value>
+    </context-param>
+    <context-param>
+        <param-name>connectionTimeout</param-name>
+        <param-value>1200000</param-value>
+    </context-param>
+
     <!--
         FILTERS
     -->

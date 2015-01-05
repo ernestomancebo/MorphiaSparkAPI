@@ -9,7 +9,7 @@ import java.util.Arrays;
  * <p/>
  * Created by ernesto on 1/4/15.
  */
-@Entity
+@Entity("artists")
 public class Artist extends BaseEntity {
 
     protected String Name;

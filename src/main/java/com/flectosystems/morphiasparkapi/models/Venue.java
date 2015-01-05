@@ -12,7 +12,7 @@ import java.util.Arrays;
  * <p/>
  * Created by ernesto on 1/4/15.
  */
-@Entity
+@Entity("venues")
 public class Venue extends BaseEntity {
 
     protected String name;
