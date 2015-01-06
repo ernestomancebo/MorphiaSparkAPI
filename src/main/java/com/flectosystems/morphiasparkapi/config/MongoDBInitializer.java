@@ -27,16 +27,18 @@ class MongoDBInitializer implements ServletContextListener {
         final String DB_NAME = context.getInitParameter("database");
         final String HOST = context.getInitParameter("databaseHost");
         final int PORT = Integer.valueOf(context.getInitParameter("databasePort"));
-        final int SOCKET_T_O = Integer.valueOf(context.getInitParameter("database"));
-        final int CONNECTION_T_O = Integer.valueOf(context.getInitParameter("database"));
+        final String USER = context.getInitParameter("user");
+        final String PASSWORD = context.getInitParameter("password");
 
         // pass parameters to the MongoDB instance
-        MongoDB.setValues(DB_NAME, HOST, PORT, SOCKET_T_O, CONNECTION_T_O);
+        MongoDB.setValues(DB_NAME, HOST, PORT, USER, PASSWORD);
         MongoDB.getInstance();
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        MongoDB.closeMongoDB();
+
         LOG.info("WebApp destroyed");
     }
 }

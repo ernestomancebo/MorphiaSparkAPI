@@ -24,12 +24,12 @@
         <param-value>27017</param-value>
     </context-param>
     <context-param>
-        <param-name>socketTimeout</param-name>
-        <param-value>60000</param-value>
+        <param-name>user</param-name>
+        <param-value>mongo</param-value>
     </context-param>
     <context-param>
-        <param-name>connectionTimeout</param-name>
-        <param-value>1200000</param-value>
+        <param-name>password</param-name>
+        <param-value>mongodb</param-value>
     </context-param>
 
     <!--
