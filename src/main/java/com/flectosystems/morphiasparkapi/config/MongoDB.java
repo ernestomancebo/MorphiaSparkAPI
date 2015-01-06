@@ -1,6 +1,15 @@
 package com.flectosystems.morphiasparkapi.config;
 
+import com.flectosystems.morphiasparkapi.models.BaseEntity;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
+import com.mongodb.WriteConcern;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+
+import java.net.UnknownHostException;
+import java.util.logging.Logger;
 
 /**
  * Class that provides access to a MongoDB instance
@@ -9,6 +18,7 @@ import org.mongodb.morphia.Datastore;
  */
 public class MongoDB {
 
+    private static final Logger LOG = Logger.getLogger(MongoDB.class.getName());
     private static final MongoDB INSTANCE = new MongoDB();
 
     private final Datastore dataStore;
@@ -16,20 +26,43 @@ public class MongoDB {
     // DB configuration
     private static String DB_NAME;
     private static String HOST;
-    private static long PORT;
-    private static long SOCKET_T_O;
-    private static long CONNECTION_T_O;
+    private static int PORT;
+    private static int SOCKET_T_O;
+    private static int CONNECTION_T_O;
 
     private MongoDB() {
+        MongoClientOptions.Builder mongoOptionsBuilder = new MongoClientOptions.Builder();
+        MongoClient mongoClient;
 
+        try {
+            mongoClient = new MongoClient(
+                    new ServerAddress(HOST, PORT),
+                    mongoOptionsBuilder
+                            .socketTimeout(SOCKET_T_O)
+                            .connectTimeout(CONNECTION_T_O)
+                            .build()
+            );
+
+        } catch (UnknownHostException e) {
+            throw new RuntimeException("Error initializing MongoDB", e);
+        }
+
+        mongoClient.setWriteConcern(WriteConcern.SAFE);
+
+        dataStore = new Morphia()
+                .mapPackage(BaseEntity.class.getPackage().getName())
+                .createDatastore(mongoClient, DB_NAME);
+        dataStore.ensureIndexes();
+
+        LOG.info("connection to '" + DB_NAME + "' initialized");
     }
 
     static void setValues(
             final String dbName,
             final String host,
-            final long port,
-            final long socketTO,
-            final long connectionTO
+            final int port,
+            final int socketTO,
+            final int connectionTO
     ) {
         DB_NAME = dbName;
         HOST = host;

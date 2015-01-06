@@ -26,9 +26,9 @@ class MongoDBInitializer implements ServletContextListener {
         // Setting up the parameters
         final String DB_NAME = context.getInitParameter("database");
         final String HOST = context.getInitParameter("databaseHost");
-        final Long PORT = Long.valueOf(context.getInitParameter("databasePort"));
-        final Long SOCKET_T_O = Long.valueOf(context.getInitParameter("database"));
-        final Long CONNECTION_T_O = Long.valueOf(context.getInitParameter("database"));
+        final int PORT = Integer.valueOf(context.getInitParameter("databasePort"));
+        final int SOCKET_T_O = Integer.valueOf(context.getInitParameter("database"));
+        final int CONNECTION_T_O = Integer.valueOf(context.getInitParameter("database"));
 
         // pass parameters to the MongoDB instance
         MongoDB.setValues(DB_NAME, HOST, PORT, SOCKET_T_O, CONNECTION_T_O);
