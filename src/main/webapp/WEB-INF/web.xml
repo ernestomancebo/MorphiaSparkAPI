@@ -9,6 +9,10 @@
     <listener>
         <listener-class>com.flectosystems.morphiasparkapi.config.MongoDBInitializer</listener-class>
     </listener>
+    <!-- Dependency Injection -->
+    <listener>
+        <listener-class>com.flectosystems.morphiasparkapi.config.DependencyInjectionInitializer</listener-class>
+    </listener>
 
     <!--Database connection params-->
     <context-param>
@@ -37,31 +41,31 @@
     -->
     <!-- User filter -->
     <!--<filter>-->
-        <!--<filter-name>UserFilter</filter-name>-->
-        <!--<filter-class>spark.servlet.SparkFilter</filter-class>-->
-        <!--<init-param>-->
-            <!--<param-name>applicationClass</param-name>-->
-            <!--<param-value>com.flectosystems.sparkapp.services.UserService</param-value>-->
-        <!--</init-param>-->
+    <!--<filter-name>UserFilter</filter-name>-->
+    <!--<filter-class>spark.servlet.SparkFilter</filter-class>-->
+    <!--<init-param>-->
+    <!--<param-name>applicationClass</param-name>-->
+    <!--<param-value>com.flectosystems.sparkapp.services.UserService</param-value>-->
+    <!--</init-param>-->
     <!--</filter>-->
     <!-- Venue filter -->
     <!--<filter>-->
-        <!--<filter-name>VenueFilter</filter-name>-->
-        <!--<filter-class>spark.servlet.SparkFilter</filter-class>-->
-        <!--<init-param>-->
-            <!--<param-name>applicationClass</param-name>-->
-            <!--<param-value>com.flectosystems.sparkapp.services.VenueService</param-value>-->
-        <!--</init-param>-->
+    <!--<filter-name>VenueFilter</filter-name>-->
+    <!--<filter-class>spark.servlet.SparkFilter</filter-class>-->
+    <!--<init-param>-->
+    <!--<param-name>applicationClass</param-name>-->
+    <!--<param-value>com.flectosystems.sparkapp.services.VenueService</param-value>-->
+    <!--</init-param>-->
     <!--</filter>-->
     <!-- Filter Mapping (URLs) -->
     <!--<filter-mapping>-->
-        <!--<filter-name>UserFilter</filter-name>-->
-        <!--<url-pattern>/api/user/*</url-pattern>-->
+    <!--<filter-name>UserFilter</filter-name>-->
+    <!--<url-pattern>/api/user/*</url-pattern>-->
     <!--</filter-mapping>-->
 
     <!--<filter-mapping>-->
-        <!--<filter-name>VenueFilter</filter-name>-->
-        <!--<url-pattern>/api/venue/*</url-pattern>-->
+    <!--<filter-name>VenueFilter</filter-name>-->
+    <!--<url-pattern>/api/venue/*</url-pattern>-->
     <!--</filter-mapping>-->
 
 </web-app>

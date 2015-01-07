@@ -42,6 +42,8 @@
             <version>3.0-alpha-1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- MongoDB -->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
@@ -53,6 +55,8 @@
             <artifactId>morphia</artifactId>
             <version>0.109</version>
         </dependency>
+
+        <!-- Spark framework -->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
@@ -69,6 +73,24 @@
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
         </dependency>
+
+        <!-- Spring and DI-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${inject.version}</version>
+        </dependency>
+
     </dependencies>
     <!-- Build Config -->
     <build>
@@ -116,6 +138,8 @@
     <!-- Properties -->
     <properties>
         <java.version>1.8</java.version>
+        <spring.version>3.1.2.RELEASE</spring.version>
+        <inject.version>1</inject.version>
         <app.name>MorphiaSparkAPI</app.name>
     </properties>
 </project>

@@ -5,9 +5,14 @@ import com.flectosystems.morphiasparkapi.models.Concert;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.BasicDAO;
 
+import javax.inject.Named;
+
 /**
+ * Class designed to access to the DB for the {@link Concert} entity.
+ * <p>
  * Created by Ernesto Mancebo T on 1/6/15.
  */
+@Named
 public class ConcertDAO extends BasicDAO<Concert, ObjectId> {
 
     public ConcertDAO() {
