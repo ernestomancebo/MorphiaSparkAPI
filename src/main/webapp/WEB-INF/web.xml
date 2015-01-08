@@ -39,15 +39,19 @@
     <!--
         FILTERS
     -->
-    <!-- User filter -->
-    <!--<filter>-->
-    <!--<filter-name>UserFilter</filter-name>-->
-    <!--<filter-class>spark.servlet.SparkFilter</filter-class>-->
-    <!--<init-param>-->
-    <!--<param-name>applicationClass</param-name>-->
-    <!--<param-value>com.flectosystems.sparkapp.services.UserService</param-value>-->
-    <!--</init-param>-->
-    <!--</filter>-->
+    <!-- Concert filter -->
+    <filter>
+        <filter-name>ConcertFilter</filter-name>
+        <filter-class>spark.servlet.SparkFilter</filter-class>
+        <init-param>
+            <param-name>applicationClass</param-name>
+            <param-value>com.flectosystems.morphiasparkapi.service.ConcertService</param-value>
+        </init-param>
+        <init-param>
+            <param-name>singleton</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
     <!-- Venue filter -->
     <!--<filter>-->
     <!--<filter-name>VenueFilter</filter-name>-->
@@ -57,11 +61,12 @@
     <!--<param-value>com.flectosystems.sparkapp.services.VenueService</param-value>-->
     <!--</init-param>-->
     <!--</filter>-->
-    <!-- Filter Mapping (URLs) -->
-    <!--<filter-mapping>-->
-    <!--<filter-name>UserFilter</filter-name>-->
-    <!--<url-pattern>/api/user/*</url-pattern>-->
-    <!--</filter-mapping>-->
+
+    <!--Filter Mapping (URLs)-->
+    <filter-mapping>
+        <filter-name>ConcertFilter</filter-name>
+        <url-pattern>/api/concert/*</url-pattern>
+    </filter-mapping>
 
     <!--<filter-mapping>-->
     <!--<filter-name>VenueFilter</filter-name>-->
