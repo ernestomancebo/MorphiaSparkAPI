@@ -16,4 +16,8 @@ public class ConcertService {
 
     @Inject
     ConcertDAO concertDAO;
+
+    public void setConcertDAO(ConcertDAO concertDAO) {
+        this.concertDAO = concertDAO;
+    }
 }

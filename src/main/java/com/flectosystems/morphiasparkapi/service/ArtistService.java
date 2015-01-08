@@ -16,4 +16,8 @@ public class ArtistService {
 
     @Inject
     ArtistDAO artistDAO;
+
+    public void setArtistDAO(ArtistDAO artistDAO) {
+        this.artistDAO = artistDAO;
+    }
 }
