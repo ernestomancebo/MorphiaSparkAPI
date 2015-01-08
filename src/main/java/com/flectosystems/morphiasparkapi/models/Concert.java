@@ -16,6 +16,7 @@ import java.util.List;
 public class Concert extends BaseEntity {
 
     protected String name;
+    protected String description;
     protected Date concertDate;
     @Embedded
     protected ConcertPrice prices;
