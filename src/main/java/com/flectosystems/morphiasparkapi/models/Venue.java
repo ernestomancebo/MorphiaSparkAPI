@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * Entity that represents a Venue.
  * As attributes, it has a name and a location (2D index)
- * <p/>
+ * <p>
  * Created by ernesto on 1/4/15.
  */
 @Entity("venues")
@@ -22,6 +22,12 @@ public class Venue extends BaseEntity {
 
     public Venue() {
         super();
+    }
+
+    public Venue(String name, double[] loc) {
+        super();
+        this.name = name;
+        this.loc = loc;
     }
 
     public String getName() {

@@ -91,6 +91,12 @@
             <version>${inject.version}</version>
         </dependency>
 
+        <!-- Unit testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
     </dependencies>
     <!-- Build Config -->
     <build>

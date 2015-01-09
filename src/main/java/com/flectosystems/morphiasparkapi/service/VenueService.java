@@ -8,6 +8,7 @@ import spark.servlet.SparkApplication;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static spark.Spark.get;
 
@@ -48,10 +49,15 @@ public class VenueService implements SparkApplication {
         // Get Venues near location
         get(Constants.VENUE_API_URL.concat("near/:location"), Constants.JSON_MIME, (req, res) -> {
             // Uses functional programming provided by Stream API /15.5521,-42.1
-            double[] location = Arrays.stream(req.params("location").split(","))
-                    .mapToDouble(position -> Double.parseDouble(position))
-                    .toArray();
-            return venueDAO.getVenueNear(location);
+            try {
+                double[] location = Arrays.stream(req.params("location").split(","))
+                        .mapToDouble(position -> Double.parseDouble(position))
+                        .toArray();
+                return venueDAO.getVenueNear(location);
+            } catch (NumberFormatException e) {
+                res.status(Constants.BAD_REQUEST);
+                return new HashMap<String, String>().put("error", "Invalid location: " + req.params("location"));
+            }
         }, new JsonTransformer());
     }
 

@@ -63,7 +63,7 @@ public class MongoDB {
 //        LOG.info("connection to '" + DB_NAME + "' initialized");
 //    }
 
-    static void setValues(
+    public static void setValues(
             final String dbName,
             final String host,
             final int port,

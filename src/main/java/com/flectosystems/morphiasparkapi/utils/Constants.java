@@ -12,6 +12,8 @@ public final class Constants {
 
     public static final String JSON_MIME = "application/json";
 
+    public static final int BAD_REQUEST = 400;
+
     private Constants() {
     }
 }
