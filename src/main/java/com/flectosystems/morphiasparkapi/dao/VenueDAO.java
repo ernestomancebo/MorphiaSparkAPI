@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * Class designed to access to the DB for the {@link Venue} entity.
- * <p>
+ * <p/>
  * Created by Ernesto Mancebo T on 1/6/15.
  */
 @Named
@@ -34,5 +34,9 @@ public class VenueDAO extends BasicDAO<Venue, ObjectId> {
                 .find(getEntityClass())
                 .field("loc").near(location[0], location[1])
                 .asList();
+    }
+
+    public String deleteAllVenues() {
+        return getDatastore().delete(getEntityClass()).getError();
     }
 }

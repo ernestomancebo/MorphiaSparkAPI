@@ -12,73 +12,20 @@ import java.util.logging.Logger;
 
 /**
  * Class that provides access to a MongoDB instance
- * <p>
+ * <p/>
  * Created by ernesto on 1/5/15.
  */
 public class MongoDB {
 
     private static final Logger LOG = Logger.getLogger(MongoDB.class.getName());
-    private static final MongoDB INSTANCE = new MongoDB();
+    private static MongoDB INSTANCE;
 
     private static MongoClient mongo;
     private static Morphia morphia;
     private static Datastore dataStore;
 
-//    private final Datastore dataStore;
-
-    // DB configuration
-    private static String USER;
-    private static String PASSWORD;
-    private static String HOST;
-    private static String DB_NAME;
-    private static int PORT;
-
     private MongoDB() {
         getMongo();
-    }
-//    private MongoDB() {
-//        MongoClientOptions.Builder mongoOptionsBuilder = new MongoClientOptions.Builder();
-//        MongoClient mongoClient;
-//
-//        try {
-//            mongoClient = new MongoClient(
-//                    new ServerAddress(HOST, PORT),
-//                    mongoOptionsBuilder
-//                            .socketTimeout(SOCKET_T_O)
-//                            .connectTimeout(CONNECTION_T_O)
-//                            .build()
-//            );
-//
-//        } catch (UnknownHostException e) {
-//            throw new RuntimeException("Error initializing MongoDB", e);
-//        }
-//
-//        mongoClient.setWriteConcern(WriteConcern.SAFE);
-//
-//        dataStore = new Morphia()
-//                .mapPackage(BaseEntity.class.getPackage().getName())
-//                .createDatastore(mongoClient, DB_NAME);
-//        dataStore.ensureIndexes();
-//
-//        LOG.info("connection to '" + DB_NAME + "' initialized");
-//    }
-
-    public static void setValues(
-            final String dbName,
-            final String host,
-            final int port,
-            final String user,
-            final String password
-    ) {
-        DB_NAME = dbName;
-        HOST = host;
-        PORT = port;
-        USER = user;
-        PASSWORD = password;
-    }
-
-    public static MongoDB getInstance() {
-        return INSTANCE;
     }
 
     public static MongoClient getMongo() {
@@ -106,6 +53,33 @@ public class MongoDB {
             LOG.info("Connection to '" + DB_NAME + "' initialized");
         }
         return mongo;
+    }
+
+    // DB configuration
+    private static String USER;
+    private static String PASSWORD;
+    private static String HOST;
+    private static String DB_NAME;
+    private static int PORT;
+
+    public static void setValues(
+            final String dbName,
+            final String host,
+            final int port,
+            final String user,
+            final String password
+    ) {
+        DB_NAME = dbName;
+        HOST = host;
+        PORT = port;
+        USER = user;
+        PASSWORD = password;
+    }
+
+    public static MongoDB getInstance() {
+        if (null == INSTANCE)
+            INSTANCE = new MongoDB();
+        return INSTANCE;
     }
 
     public static Morphia getMorphia() {

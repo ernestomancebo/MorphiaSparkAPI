@@ -21,7 +21,13 @@ public class PersistenceTest {
      */
     @Before
     public void setUp() throws Exception {
-        MongoDB.setValues("");
+        MongoDB.setValues(
+                "concert_api",
+                "127.0.0.1",
+                27017,
+                "mongo",
+                "mongodb"
+        );
         MongoDB.getInstance();
 
         venueDAO = new VenueDAO();
@@ -35,7 +41,7 @@ public class PersistenceTest {
      */
     @After
     public void tearDown() throws Exception {
-        venueDAO.delete(Venue.class);
+        venueDAO.deleteAllVenues();
     }
 
     /**
@@ -45,16 +51,16 @@ public class PersistenceTest {
     public void persistVenue() {
         Venue v = new Venue("Roma", new double[]{15.22, -45.36});
 
-        ObjectId id = venueDAO.save(v);
+        ObjectId id = (ObjectId) venueDAO.save(v).getId();
         assertNotNull("An ObjectId must be generated when persisting", id);
         assertEquals("The returned value must match", id, v.getId());
     }
 
     @Test
     public void findVenueByName() {
-        assertNull("Null param shouldn't find anything", venueDAO.getVenueByName(null));
-        assertnull("Empty parameter shouldn't find anything", venueDAO.getVenueByName(""));
-        assertNull("Wrong name shoudn't find anything", venueDAO.getVenueByName("soda"));
+        assertFalse("Null param shouldn't find anything", venueDAO.getVenueByName(null).isEmpty());
+        assertFalse("Empty parameter shouldn't find anything", venueDAO.getVenueByName("").isEmpty());
+        assertFalse("Wrong name shoudn't find anything", venueDAO.getVenueByName("soda").isEmpty());
         assertEquals("A simmilar name should find a venue", "Roma", venueDAO.getVenueByName("oMa").get(0));
     }
 
@@ -63,6 +69,9 @@ public class PersistenceTest {
      */
     @Test
     public void findVenueNear() {
-        assertNotNull("Should find something near me", venueDAO.getVenueNear([15.0, -44]));
+        assertNotNull("Should find something near me",
+                venueDAO.getVenueNear(
+                        new double[]{15.0D, -44.0D}
+                ).get(0));
     }
 }
