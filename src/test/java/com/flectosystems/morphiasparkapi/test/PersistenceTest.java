@@ -4,13 +4,15 @@ import com.flectosystems.morphiasparkapi.config.MongoDB;
 import com.flectosystems.morphiasparkapi.dao.VenueDAO;
 import com.flectosystems.morphiasparkapi.models.Venue;
 import org.bson.types.ObjectId;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class PersistenceTest {
 
-    private static  VenueDAO venueDAO;
+    private static VenueDAO venueDAO;
 
     /**
      * Get the connection to the DB and ensure it's not null.
@@ -34,13 +36,21 @@ public class PersistenceTest {
     }
 
     /**
-     * After finish, clean up the DB.
+     * After finish, clean up the DB and add some data.
      *
      * @throws Exception
      */
     @AfterClass
     public static void tearDown() throws Exception {
         venueDAO.deleteAllVenues();
+
+        Venue v = new Venue("Estado Olimpico, Santo Domingo", new double[]{18.4775607, -69.9151118});
+        venueDAO.save(v);
+        v = new Venue("Bellas Artes, Santo Domingo", new double[]{18.4662652, -69.91582});
+        venueDAO.save(v);
+
+        venueDAO = null;
+        MongoDB.closeMongoDB();
     }
 
     /**

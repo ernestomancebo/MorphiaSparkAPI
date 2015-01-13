@@ -5,6 +5,10 @@
     <display-name>Morphia Spark API</display-name>
     <description>A sample Morphia Spark API on a Servlet Container</description>
 
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
     <!--Database connection-->
     <listener>
         <listener-class>com.flectosystems.morphiasparkapi.config.MongoDBInitializer</listener-class>
@@ -41,11 +45,11 @@
     -->
     <!-- Concert filter -->
     <filter>
-        <filter-name>ConcertFilter</filter-name>
+        <filter-name>VenueFilter</filter-name>
         <filter-class>spark.servlet.SparkFilter</filter-class>
         <init-param>
             <param-name>applicationClass</param-name>
-            <param-value>com.flectosystems.morphiasparkapi.service.ConcertService</param-value>
+            <param-value>com.flectosystems.morphiasparkapi.service.VenueService</param-value>
         </init-param>
         <init-param>
             <param-name>singleton</param-name>
@@ -64,8 +68,8 @@
 
     <!--Filter Mapping (URLs)-->
     <filter-mapping>
-        <filter-name>ConcertFilter</filter-name>
-        <url-pattern>/api/concert/*</url-pattern>
+        <filter-name>VenueFilter</filter-name>
+        <url-pattern>/api/venue/*</url-pattern>
     </filter-mapping>
 
     <!--<filter-mapping>-->

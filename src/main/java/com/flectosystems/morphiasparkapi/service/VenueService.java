@@ -24,7 +24,7 @@ public class VenueService implements SparkApplication {
     @Inject
     VenueDAO venueDAO;
 
-    private VenueService instance = null;
+    private static VenueService INSTANCE = null;
 
     public VenueService() {
     }
@@ -37,7 +37,7 @@ public class VenueService implements SparkApplication {
     public void init() {
 
         // Get all venues
-        get(Constants.VENUE_API_URL.concat("get/"), Constants.JSON_MIME, (req, res) -> {
+        get("/api/venue/get/", Constants.JSON_MIME, (req, res) -> {
             return venueDAO.find().asList();
         }, new JsonTransformer());
 
@@ -66,10 +66,10 @@ public class VenueService implements SparkApplication {
      *
      * @return
      */
-    public VenueService getInstance() {
-        if (null == instance)
-            instance = this;
+    public static VenueService getInstance() {
+        if (null == INSTANCE)
+            INSTANCE = new VenueService();
 
-        return instance;
+        return INSTANCE;
     }
 }
