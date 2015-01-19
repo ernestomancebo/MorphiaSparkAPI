@@ -2,5 +2,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <bean id="VenueDAO" class="com.flectosystems.morphiasparkapi.dao.VenueDAO"/>
-
+    <bean id="ArtistDAO" class="com.flectosystems.morphiasparkapi.dao.ArtistDAO"/>
+    <bean id="ConcertDAO" class="com.flectosystems.morphiasparkapi.dao.ConcertDAO"/>
 </beans>

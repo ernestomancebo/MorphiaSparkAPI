@@ -1,6 +1,10 @@
 package com.flectosystems.morphiasparkapi.config;
 
+import com.flectosystems.morphiasparkapi.dao.ArtistDAO;
+import com.flectosystems.morphiasparkapi.dao.ConcertDAO;
 import com.flectosystems.morphiasparkapi.dao.VenueDAO;
+import com.flectosystems.morphiasparkapi.service.ArtistService;
+import com.flectosystems.morphiasparkapi.service.ConcertService;
 import com.flectosystems.morphiasparkapi.service.VenueService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -23,6 +27,10 @@ public class DependencyInjectionInitializer implements ServletContextListener {
         });
 
         VenueService.getInstance().setVenueDAO((VenueDAO) context.getBean("VenueDAO"));
+
+        ArtistService.getInstance().setArtistDAO((ArtistDAO) context.getBean("ArtistDAO"));
+        ConcertService.getInstance().setConcertDAO((ConcertDAO) context.getBean("ConcertDAO"));
+
     }
 
     @Override

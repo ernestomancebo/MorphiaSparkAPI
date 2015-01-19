@@ -26,7 +26,7 @@ public class VenueService implements SparkApplication {
 
     private static VenueService INSTANCE = null;
 
-    public VenueService() {
+    private VenueService() {
     }
 
     public void setVenueDAO(VenueDAO venueDAO) {
