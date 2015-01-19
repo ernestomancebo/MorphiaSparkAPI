@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * Created by ernesto on 1/5/15.
  */
 
-class MongoDBInitializer implements ServletContextListener {
+public class MongoDBInitializer implements ServletContextListener {
 
     private static final Logger LOG = Logger.getLogger(MongoDBInitializer.class.getName());
 

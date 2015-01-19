@@ -24,9 +24,9 @@ public class VenueService implements SparkApplication {
     @Inject
     VenueDAO venueDAO;
 
-    private VenueService instance = null;
+    private static VenueService instance = null;
 
-    public VenueService() {
+    private VenueService() {
     }
 
     public void setVenueDAO(VenueDAO venueDAO) {
@@ -66,9 +66,9 @@ public class VenueService implements SparkApplication {
      *
      * @return
      */
-    public VenueService getInstance() {
+    public static VenueService getInstance() {
         if (null == instance)
-            instance = this;
+            instance = new VenueService();
 
         return instance;
     }
