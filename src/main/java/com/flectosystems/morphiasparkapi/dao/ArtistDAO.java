@@ -13,7 +13,7 @@ import javax.inject.Named;
  * Created by Ernesto Mancebo T on 1/6/15.
  */
 @Named
-public class ArtistDAO extends BasicDAO<Artist, ObjectId> {
+public class ArtistDAO extends ExtendedBasicDAO<Artist, ObjectId> {
 
     public ArtistDAO() {
         super(MongoDB.getInstance().getDatastore());

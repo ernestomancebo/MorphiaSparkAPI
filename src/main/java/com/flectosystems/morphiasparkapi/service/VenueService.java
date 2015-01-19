@@ -3,11 +3,11 @@ package com.flectosystems.morphiasparkapi.service;
 import com.flectosystems.morphiasparkapi.dao.VenueDAO;
 import com.flectosystems.morphiasparkapi.utils.Constants;
 import com.flectosystems.morphiasparkapi.utils.JsonTransformer;
+import com.flectosystems.morphiasparkapi.utils.Util;
 import spark.servlet.SparkApplication;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static spark.Spark.get;
@@ -37,23 +37,20 @@ public class VenueService implements SparkApplication {
     public void init() {
 
         // Get all venues
-        get("/api/venue/get/", Constants.JSON_MIME, (req, res) -> {
+        get(Constants.VENUE_API_URL.concat("/get/"), Constants.JSON_MIME, (req, res) -> {
             return venueDAO.find().asList();
         }, new JsonTransformer());
 
         // Get Venues by name
         get(Constants.VENUE_API_URL.concat("getByName/:name"), Constants.JSON_MIME, (req, res) -> {
-            return venueDAO.getVenueByName(req.params("name"));
+            return venueDAO.findByName(req.params("name"));
         }, new JsonTransformer());
 
         // Get Venues near location
         get(Constants.VENUE_API_URL.concat("near/:location"), Constants.JSON_MIME, (req, res) -> {
             // Uses functional programming provided by Stream API /15.5521,-42.1
             try {
-                double[] location = Arrays.stream(req.params("location").split(","))
-                        .mapToDouble(position -> Double.parseDouble(position))
-                        .toArray();
-                return venueDAO.getVenueNear(location);
+                return venueDAO.getVenueNear(Util.getLocationFromString(req.params("location")));
             } catch (NumberFormatException e) {
                 res.status(Constants.BAD_REQUEST);
                 return new HashMap<String, String>().put("error", "Invalid location: " + req.params("location"));

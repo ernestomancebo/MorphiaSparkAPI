@@ -1,18 +1,23 @@
 package com.flectosystems.morphiasparkapi.test;
 
 import com.flectosystems.morphiasparkapi.config.MongoDB;
+import com.flectosystems.morphiasparkapi.dao.ConcertDAO;
 import com.flectosystems.morphiasparkapi.dao.VenueDAO;
+import com.flectosystems.morphiasparkapi.models.Concert;
 import com.flectosystems.morphiasparkapi.models.Venue;
 import org.bson.types.ObjectId;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class PersistenceTest {
 
     private static VenueDAO venueDAO;
+    private static ConcertDAO concertDAO;
 
     /**
      * Get the connection to the DB and ensure it's not null.
@@ -32,6 +37,7 @@ public class PersistenceTest {
         MongoDB.getMorphia();
 
         venueDAO = new VenueDAO();
+        concertDAO = new ConcertDAO();
         assertNotNull(MongoDB.getMongo());
     }
 
@@ -48,6 +54,11 @@ public class PersistenceTest {
         venueDAO.save(v);
         v = new Venue("Bellas Artes, Santo Domingo", new double[]{18.4662652, -69.91582});
         venueDAO.save(v);
+
+        Concert c = new Concert("Concert 1", new Date());
+        c.setVenue(v);
+
+        concertDAO.save(c);
 
         venueDAO = null;
         MongoDB.closeMongoDB();
@@ -67,10 +78,10 @@ public class PersistenceTest {
 
     @Test
     public void findVenueByName() {
-        assertTrue("Null param shouldn't find anything", venueDAO.getVenueByName(null).isEmpty());
-        assertTrue("Empty parameter shouldn't find anything", venueDAO.getVenueByName("").isEmpty());
-        assertTrue("Wrong name shoudn't find anything", venueDAO.getVenueByName("soda").isEmpty());
-        assertEquals("A simmilar name should find a venue", "Roma", venueDAO.getVenueByName("oMa").get(0).getName());
+        assertTrue("Null param shouldn't find anything", venueDAO.findByName(null).isEmpty());
+        assertTrue("Empty parameter shouldn't find anything", venueDAO.findByName("").isEmpty());
+        assertTrue("Wrong name shoudn't find anything", venueDAO.findByName("soda").isEmpty());
+        assertEquals("A simmilar name should find a venue", "Roma", venueDAO.findByName("oMa").get(0).getName());
     }
 
     /**
@@ -83,4 +94,6 @@ public class PersistenceTest {
                         new double[]{15.0D, -44.0D}
                 ).get(0));
     }
+
+    
 }

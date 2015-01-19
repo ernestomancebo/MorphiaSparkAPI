@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Represents a concert. As every concert, it has an {@link Artist} in a {@link Venue}.
- * <p/>
+ * <p>
  * Created by ernesto on 1/4/15.
  */
 @Entity("concerts")
@@ -24,6 +24,14 @@ public class Concert extends BaseEntity {
     protected Venue venue;
     @Reference("concert_artists")
     protected List<Artist> artist;
+
+    public Concert() {
+    }
+
+    public Concert(String name, Date concertDate) {
+        this.name = name;
+        this.concertDate = concertDate;
+    }
 
     public String getName() {
         return name;
