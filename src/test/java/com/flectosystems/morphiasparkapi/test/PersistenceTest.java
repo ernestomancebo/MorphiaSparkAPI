@@ -80,8 +80,8 @@ public class PersistenceTest {
     public void findVenueByName() {
         assertTrue("Null param shouldn't find anything", venueDAO.findByName(null).isEmpty());
         assertTrue("Empty parameter shouldn't find anything", venueDAO.findByName("").isEmpty());
-        assertTrue("Wrong name shoudn't find anything", venueDAO.findByName("soda").isEmpty());
-        assertEquals("A simmilar name should find a venue", "Roma", venueDAO.findByName("oMa").get(0).getName());
+        assertTrue("Wrong name shouldn't find anything", venueDAO.findByName("soda").isEmpty());
+        assertEquals("A similar name should find a venue", "Roma", venueDAO.findByName("oMa").get(0).getName());
     }
 
     /**
@@ -95,5 +95,24 @@ public class PersistenceTest {
                 ).get(0));
     }
 
-    
+    @Test
+    public void persistConcert() {
+        Venue v = venueDAO.findByName("Roma").get(0);
+
+        Concert c = new Concert("Concert A", new Date());
+        c.setVenue(v);
+
+        ObjectId id = (ObjectId) concertDAO.save(c).getId();
+
+        assertNotNull("An ObjectId must be generated when persisting", id);
+        assertEquals("The returned value must match", id, c.getId());
+    }
+
+    @Test
+    public void findConcertByName() {
+        assertTrue("Null param shouldn't find anything", concertDAO.findByName(null).isEmpty());
+        assertTrue("Empty parameter shouldn't find anything", concertDAO.findByName("").isEmpty());
+        assertTrue("Wrong name shouldn't find anything", concertDAO.findByName("house").isEmpty());
+        assertEquals("A similar name should find a venue", "Concert A", concertDAO.findByName("ERT a").get(0).getName());
+    }
 }

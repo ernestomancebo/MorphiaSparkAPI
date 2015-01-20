@@ -36,7 +36,7 @@ public class ConcertDAO extends ExtendedBasicDAO<Concert, ObjectId> {
     }
 
     /**
-     * Find documents in collection by date.
+     * Find documents in collection by venue.
      */
     public List<Concert> findByVenue(ObjectId venueID) {
         if (null == venueID)
